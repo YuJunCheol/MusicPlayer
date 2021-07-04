@@ -1,2 +1,6 @@
-package com.yujuncheol.test.musicplayer.DI;public class Music {
+package com.yujuncheol.test.musicplayer.DI;
+
+public class Music {
+
+
 }

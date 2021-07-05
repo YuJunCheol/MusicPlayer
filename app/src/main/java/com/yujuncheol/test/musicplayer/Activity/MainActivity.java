@@ -1,4 +1,4 @@
-package com.yujuncheol.test.musicplayer;
+package com.yujuncheol.test.musicplayer.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.yujuncheol.test.musicplayer.R;
 
 import java.util.ArrayList;
 
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (musicList.size() == 0) {
             int i = R.raw.mariin5;
                 if(MediaPlayer.create(getApplicationContext(),i) != null) {
-                    Toast.makeText(getApplicationContext(), "안비었음",Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), "안비었음",Toast.LENGTH_SHORT).show();
                     mediaPlayer = MediaPlayer.create(getApplicationContext(), i);
                     mediaPlayer.start();
                     // i++;

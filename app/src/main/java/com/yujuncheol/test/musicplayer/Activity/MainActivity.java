@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.yujuncheol.test.musicplayer.Model.Service.MusicService;
 import com.yujuncheol.test.musicplayer.R;
 
 import java.util.ArrayList;
@@ -16,13 +17,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private MediaPlayer mediaPlayer;
     private Button btn_play;
-    private ArrayList<Integer> musicList = new ArrayList<>();;
-
+    private ArrayList<Integer> musicList = new ArrayList<>();
+    private MusicService musicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         btn_play = findViewById(R.id.button_play);
 
@@ -38,26 +40,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public ArrayList<Integer> setMusic() {
-        // 첫번쨰 주소를 입력 후 R.raw. 가 비어있지 않을때 까지 추가한다.
-        if (musicList.size() == 0) {
-            int i = R.raw.mariin5;
-                if(MediaPlayer.create(getApplicationContext(),i) != null) {
-                    // Toast.makeText(getApplicationContext(), "안비었음",Toast.LENGTH_SHORT).show();
-                    mediaPlayer = MediaPlayer.create(getApplicationContext(), i);
-                    mediaPlayer.start();
-                    // i++;
-                }
-
-
-        }
-        return musicList;
-    }
-
     public void playMusic() {
-        setMusic();
-        // mediaPlayer = MediaPlayer.create(getApplicationContext(),musicList.get(0));
-        // mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.mariin5);
-        //  mediaPlayer.start();
+        if(mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.reset(); // 기존의 mediaplayer 를 초기화 (mediaplayer.stop, mediaplayer = null 과정 포함)
+            btn_play.setText("PLAY");
+        }
+        else {
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.music);
+            mediaPlayer.start(); // 재생
+            mediaPlayer.setLooping(true); // 반복 여부1
+            btn_play.setText("STOP");
+        }
     }
+
+    public void stop() {
+        if(mediaPlayer.isPlaying()) {
+            mediaPlayer.release();
+        }
+    }
+
 }
